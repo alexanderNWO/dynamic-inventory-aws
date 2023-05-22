@@ -1,0 +1,31 @@
+- name: Deploy a web application
+  hosts: tag_tech_ansible
+  become: yes
+  tasks:
+    - name: Install dependencies and updating repositories
+      ansible.builtin.apt:
+        name: [nodejs,npm]
+        state: latest
+        update_cache: yes
+
+    - name: Install MySQL database
+      ansible.builtin.apt:
+        name: [mysql-server, mysql-client]
+        state:  present
+
+    - name: Start Mysql Service
+      service:
+        name: mysql
+        state: started
+        enabled: yes
+
+    - name: Clone a github repository
+      git:
+        repo: https://github.com/johnpapa/node-hello.git
+        dest: /home/ubuntu/node-hello/
+        clone: yes
+        update: yes
+  roles:
+    - upgrade-ubuntu
+    - nginxinc.nginx
+    - my_new_role
