@@ -20,6 +20,6 @@ jobs:
         with:
           molecule_command: test
           molecule_args: -d docker
-          molecule_working_dir: alexanderNWO/molecule-testing/my_new_role
+          molecule_working_dir: alexanderNWO/dynamic-inventory-aws/my_new_role
         env:
           ANSIBLE_FORCE_COLOR: '1'
